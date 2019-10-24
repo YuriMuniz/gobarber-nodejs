@@ -6,7 +6,7 @@ import Appointment from '../models/Appointment';
 class ScheduleController {
     async index(req, res) {
         const checkUserProvider = await User.findOne({
-            where: { id: req.UserId, provider: true },
+            where: { id: req.userId, provider: true },
         });
 
         if (!checkUserProvider) {
@@ -18,7 +18,7 @@ class ScheduleController {
 
         const appointments = await Appointment.findAll({
             where: {
-                provider_id: req.UserId,
+                provider_id: req.userId,
                 canceled_at: null,
                 date: {
                     [Op.between]: [startOfDay(parseDate), endOfDay(parseDate)],
