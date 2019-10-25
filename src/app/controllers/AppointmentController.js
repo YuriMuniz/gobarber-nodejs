@@ -47,6 +47,15 @@ class AppointmentController {
 
         const { provider_id, date } = req.body;
 
+        /**
+         * Verificar se usuario logado é o mesmo que o prestador de serviço
+         */
+        if (req.userId === provider_id) {
+            return res
+                .status(401)
+                .json('Provider user and user must be different ');
+        }
+
         // Verificar se provider_id é um provider
         const isProvider = await User.findOne({
             where: { id: provider_id, provider: true },
