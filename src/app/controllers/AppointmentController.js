@@ -53,7 +53,7 @@ class AppointmentController {
         if (req.userId === provider_id) {
             return res
                 .status(401)
-                .json('Provider user and user must be different ');
+                .json('Provider user and user must be different');
         }
 
         // Verificar se provider_id é um provider
